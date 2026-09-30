@@ -1,2 +1,23 @@
-import { useState } from "react"; import Sidebar from "./Sidebar"; import Topbar from "./Topbar";
-export default function Layout({children}:{children:React.ReactNode}) { const [open,setOpen]=useState(false); return <div className="min-h-screen bg-slate-50"><Sidebar mobileOpen={open} setMobileOpen={setOpen}/><div className="lg:pl-64"><Topbar onMenu={()=>setOpen(true)}/><main className="p-4 md:p-6 lg:p-8">{children}</main></div>{open&&<div className="fixed inset-0 z-40 bg-slate-900/40 lg:hidden" onClick={()=>setOpen(false)}/>}</div> }
+import { useState, type ReactNode } from "react";
+import Sidebar from "./Sidebar";
+import Topbar from "./Topbar";
+
+export default function Layout({ children }: { children: ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="min-h-screen bg-slate-50">
+      <Sidebar mobileOpen={open} setMobileOpen={setOpen} />
+      <div className="lg:pl-64">
+        <Topbar onMenu={() => setOpen(true)} />
+        <main className="p-4 md:p-6 lg:p-8">{children}</main>
+      </div>
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-slate-900/40 lg:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+    </div>
+  );
+}
+
